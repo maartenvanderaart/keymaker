@@ -14,7 +14,7 @@ public class Main {
     		password.generatePassword();
     		password.setServername(servername);
     		password.setUsername(username);
-    		String chmodString = "chmod -p '" + password.getCrypt() + "' " + username +"\n";
+    		String usermodString = "usermod -p '" + password.getCrypt() + "' " + username +"\n";
     		System.out.println("server " + request.ip() + " requested a password change for user " + username + " on " + servername);
     		JSONObject record = new JSONObject();
     		record.put("Date", password.getDate().toString());
@@ -22,7 +22,7 @@ public class Main {
     		record.put("Username", password.getUsername());
     		record.put("Password", password.getPassword());
     		System.out.println(record.toString());
-    		return chmodString;
+    		return usermodString;
     	});
 
     }
