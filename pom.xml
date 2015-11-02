@@ -6,6 +6,14 @@
   <name>keymaker</name>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <resources>
+        <resource>
+            <directory>src/keymaker/resources</directory>
+            <includes>
+                <include>log4j2.xml</include>
+            </includes>
+        </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -63,7 +71,16 @@
 		<artifactId>json</artifactId>
 		<version>20150729</version>
 	</dependency>
-
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.4.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.4.1</version>
+    </dependency>
 
   </dependencies>
 </project>
