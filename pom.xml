@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Keymaker</groupId>
   <artifactId>Keymaker</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.2</version>
   <name>keymaker</name>
   <build>
     <sourceDirectory>src</sourceDirectory>

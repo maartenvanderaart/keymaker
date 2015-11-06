@@ -19,6 +19,7 @@ public class Main {
     		String usermodString = "usermod -p '" + password.getCrypt() + "' " + password.getUsername() +"\n";
     		logger.info("server " + request.ip() + " requested a password change for user " + password.getUsername() +
 					" on " + password.getServername());
+            //[TODO] Make the output directory configurable
             String filename = "outputDir/" + password.getUsername() + "@" + password.getServername() + ".txt";
             try (FileWriter file = new FileWriter(filename, true)){
                 file.write(password.toString() + "\n");
