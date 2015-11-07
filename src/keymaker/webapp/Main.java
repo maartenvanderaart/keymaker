@@ -10,13 +10,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.FileWriter;
 
 
-public class Main {
+class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
     	get("updatepassword/:username/:servername", (request, response) -> {
-    		Password password = new Password(request.params(":username"), request.params(":servername"));
-    		String usermodString = "usermod -p '" + password.getCrypt() + "' " + password.getUsername() +"\n";
+    		Password password = new Password(request.params(":username"), request.params(":servername"), 60);
+    		String usermodString = "usermod -p '" + password.toCrypt() + "' " + password.getUsername() +"\n";
     		logger.info("server " + request.ip() + " requested a password change for user " + password.getUsername() +
 					" on " + password.getServername());
             //[TODO] Make the output directory configurable

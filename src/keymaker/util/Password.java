@@ -1,26 +1,22 @@
 package keymaker.util;
 
-import java.math.BigInteger;
 import java.util.Date;
-import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.codec.digest.Crypt;
 import org.json.JSONObject;
 
 public class Password {
-	private String password;
-	private String crypt;
-	private String salt;
-	private String username;
-	private String servername;
+	private final String password;
+	private final String username;
+	private final String servername;
+	private final Date date = new Date();
 
-	public Password(String username, String servername){
-		generatePassword();
+	public Password(String username, String servername, int length){
+		this.password = RandomStringUtils.randomAlphanumeric(length);
 		this.username = username;
 		this.servername = servername;
 	}
-	private Date date = new Date();
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -33,23 +29,8 @@ public class Password {
 	public String getPassword() {
 		return password;
 	}
-	public void generatePassword() {
-		Random random = new Random();
-		this.password = new BigInteger(130, random).toString(32);
-		generateSalt(16);
-		generateCrypt(password);
-	}
-	public String getSalt() {
-		return salt;
-	}
-	private void generateSalt(int length) {
-		this.salt = "$6$" + RandomStringUtils.randomAlphanumeric(length);
-	}
-	public String getCrypt() {
-		return crypt;
-	}
-	private void generateCrypt(String password){
-		this.crypt = Crypt.crypt(password, salt);
+	public String toCrypt(){
+		return Crypt.crypt(password, "$6$" +  RandomStringUtils.randomAlphanumeric(16));
 	}
 	public JSONObject toJSON(){
 		JSONObject record = new JSONObject();
@@ -60,10 +41,9 @@ public class Password {
 		return record;
 	}
 	public String toString(){
-		String passString = "Date = " + date.toString() +
+		return "Date = " + date.toString() +
 				", Hostname = " + servername +
 				", Username = " + username +
 				", Password = " + password;
-		return passString;
 	}
 }
