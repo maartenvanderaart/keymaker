@@ -14,19 +14,19 @@ class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-    	get("updatepassword/:username/:servername", (request, response) -> {
-    		Password password = new Password(request.params(":username"), request.params(":servername"), 60);
-    		String usermodString = "usermod -p '" + password.toCrypt() + "' " + password.getUsername() +"\n";
-    		logger.info("server " + request.ip() + " requested a password change for user " + password.getUsername() +
-					" on " + password.getServername());
+        get("updatepassword/:username/:servername", (request, response) -> {
+            Password password = new Password(request.params(":username"), request.params(":servername"), 60);
+            String usermodString = "usermod -p '" + password.toCrypt() + "' " + password.getUsername() +"\n";
+            logger.info("server " + request.ip() + " requested a password change for user " + password.getUsername() +
+                    " on " + password.getServername());
             //[TODO] Make the output directory configurable
             String filename = "outputDir/" + password.getUsername() + "@" + password.getServername() + ".txt";
             try (FileWriter file = new FileWriter(filename, true)){
                 file.write(password.toString() + "\n");
                 logger.info("wrote new password to " + filename);
             }
-    		return usermodString;
-    	});
+            return usermodString;
+        });
 
     }
 }
