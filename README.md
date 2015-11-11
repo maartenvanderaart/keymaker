@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/maartenvanderaart/keymaker.svg?branch=travis-integration)](https://travis-ci.org/maartenvanderaart/keymaker)
+
 # Keymaker, PoC password generator and management
 
 This is a first shot at a webservice for generating passwords and managing
