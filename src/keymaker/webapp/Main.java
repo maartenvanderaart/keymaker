@@ -35,7 +35,7 @@ class Main {
             logger.warn("Using default value for output directory: " + outputDir);
         }
 
-        get("updatepassword/:username/:servername", (request, response) -> {
+        get("usermod/randompass/:username/:servername", (request, response) -> {
             Password password = new Password(request.params(":username"), request.params(":servername"), passwordLength);
             String usermodString = "usermod -p '" + password.toCrypt() + "' " + password.getUsername() +"\n";
             logger.info("server " + request.ip() + " requested a password change for user " + password.getUsername() +
@@ -48,5 +48,22 @@ class Main {
             return usermodString;
         });
 
+        get("usermod/presetpass/:username/:servername", (request, response) -> {
+            //TODO: Implement a method to read preset passwords from a file and return a usermod cmd
+            logger.info("Requested unimplemented feature \"presetpass\"");
+            return "Not yet implemented\n";
+        });
+
+        get("ssh/getpubkey/:username", (request, response) -> {
+            //TODO: Implement a method to read user's public key from file and return as String
+            logger.info("Requested unimplemented feature \"getpubkey\"");
+            return "Not yet implemented\n";
+        });
+
+        put("ssh/puthostkey/:servername", (request, response) -> {
+            //TODO: Implement a method to upload host public key
+            logger.info("Requested unimplemented feature \"puthostkey\"");
+            return "Not yet implemented\n";
+        });
     }
 }
